@@ -1,0 +1,20 @@
+{
+  "name": "bural-cloud",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply helloagent --local",
+    "db:migrate:remote": "wrangler d1 migrations apply helloagent --remote",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "node test/e2e.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261101.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.156.1",
+    "ws": "^8.22.1"
+  }
+}

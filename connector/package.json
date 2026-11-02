@@ -1,0 +1,24 @@
+{
+  "name": "bural-connector",
+  "version": "0.1.0",
+  "description": "Local MCP connector for Bural Cloud (Codex, Claude Code)",
+  "type": "module",
+  "bin": { "bural-connector": "dist/index.js" },
+  "main": "dist/index.js",
+  "files": ["dist"],
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "ws": "^8.22.1",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/ws": "^8.5.12",
+    "typescript": "^5.9.3"
+  }
+}

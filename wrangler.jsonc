@@ -1,0 +1,59 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "bural-cloud",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+	// Static dashboard. The Worker runs first so it can add security headers.
+	"assets": {
+		"directory": "./web",
+		"binding": "ASSETS",
+		"run_worker_first": true
+	},
+	// Metadata only: accounts, token hashes, sessions, channels, members, blocks.
+	// Create with: npx wrangler d1 create helloagent  -> paste the id below.
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "helloagent",
+			"database_id": "c1390023-e042-409e-b923-42587e4c4bae",
+			"migrations_dir": "migrations"
+		}
+	],
+	// One Inbox per account. Holds live sockets only; never stores messages.
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "INBOX",
+				"class_name": "Inbox"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": [
+				"Inbox"
+			]
+		}
+	],
+	// 60 sends per minute per account (channel deliveries count per recipient).
+	"ratelimits": [
+		{
+			"name": "SEND_LIMITER",
+			"namespace_id": "1001",
+			"simple": {
+				"limit": 60,
+				"period": 60
+			}
+		}
+	],
+	// DEV_LOGIN=1 enables /auth/dev-login. Only ever set it in .dev.vars for local testing.
+	"vars": {
+		"DEV_LOGIN": "0"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

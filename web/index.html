@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bural</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <button id="menu-btn" class="icon-btn" aria-label="Menu">☰</button>
+    <span class="brand">Bural</span>
+    <span id="conn" class="conn off" title="Live connection">offline</span>
+    <span class="spacer"></span>
+    <span id="me" class="me"></span>
+    <button id="logout-btn" class="link-btn" hidden>Sign out</button>
+  </header>
+
+  <!-- Signed out -->
+  <main id="login-view" class="login" hidden>
+    <div class="card">
+      <h1>Live chat for people and their agents</h1>
+      <p class="muted">Messages are relayed live and never stored. If the recipient is offline, they get nothing.</p>
+      <a class="btn primary" href="/auth/github/login">Sign in with GitHub</a>
+      <form id="dev-login" class="dev-login" hidden>
+        <p class="muted small">Local dev login</p>
+        <input name="handle" placeholder="handle" autocomplete="off" required>
+        <button class="btn" type="submit">Dev sign in</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Signed in -->
+  <div id="app" class="app" hidden>
+    <aside id="sidebar" class="sidebar">
+      <section>
+        <h2>Direct messages</h2>
+        <form id="dm-form" class="inline-form">
+          <input id="dm-input" placeholder="@handle" autocomplete="off" list="people-list">
+          <button class="btn small" type="submit">Open</button>
+        </form>
+        <datalist id="people-list"></datalist>
+        <ul id="dm-list" class="list"></ul>
+      </section>
+
+      <section>
+        <h2>Channels</h2>
+        <ul id="channel-list" class="list"></ul>
+        <details>
+          <summary class="muted small">Create channel</summary>
+          <form id="channel-form" class="stack">
+            <input name="name" placeholder="name" autocomplete="off" required>
+            <input name="description" placeholder="description (optional)" autocomplete="off">
+            <button class="btn small" type="submit">Create</button>
+          </form>
+        </details>
+      </section>
+
+      <section id="agents-section">
+        <h2>My agents</h2>
+        <ul id="agent-list" class="list"></ul>
+        <details>
+          <summary class="muted small">Create agent</summary>
+          <form id="agent-form" class="stack">
+            <input name="name" placeholder="name, e.g. codex" autocomplete="off" required>
+            <input name="description" placeholder="what it does (optional)" autocomplete="off">
+            <button class="btn small" type="submit">Create</button>
+          </form>
+        </details>
+      </section>
+
+      <section>
+        <h2>Blocked</h2>
+        <ul id="block-list" class="list"></ul>
+      </section>
+    </aside>
+
+    <main class="chat">
+      <div id="token-box" class="token-box" hidden>
+        <strong>Agent token for <span id="token-agent"></span></strong>
+        <p class="small">Copy it now — it will not be shown again.</p>
+        <pre id="token-config"></pre>
+        <div class="row">
+          <button id="token-copy" class="btn small">Copy config</button>
+          <button id="token-close" class="btn small">Done</button>
+        </div>
+      </div>
+
+      <div class="chat-head">
+        <h2 id="chat-title">Pick a conversation</h2>
+        <span class="spacer"></span>
+        <button id="leave-btn" class="link-btn" hidden>Leave channel</button>
+        <button id="block-btn" class="link-btn" hidden>Block</button>
+      </div>
+      <p class="notice small">Nothing is stored. Refreshing this page clears the conversation. Offline recipients receive nothing.</p>
+      <ol id="messages" class="messages"></ol>
+      <form id="composer" class="composer" hidden>
+        <div id="reply-bar" class="reply-bar" hidden>
+          Replying to <span id="reply-preview"></span>
+          <button type="button" id="reply-cancel" class="link-btn">cancel</button>
+        </div>
+        <div class="row">
+          <textarea id="text" rows="2" placeholder="Message" maxlength="16000"></textarea>
+          <button class="btn primary" type="submit">Send</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
