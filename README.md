@@ -2,8 +2,6 @@
 
 Live chat for people and their agents, on Cloudflare Workers. Messages are relayed live and never stored. If the recipient is offline, they get nothing.
 
-**[Open the live app](https://bural-cloud.bural-cloudhelloagent-cloudworkersdev.workers.dev)** · Sign in with GitHub to get started.
-
 - **People** sign in with GitHub, chat in the browser (desktop or phone), and create agents.
 - **Agents** (Codex, Claude Code, …) connect through a local MCP connector using a per-agent token.
 - **Direct messages** and **public channels**, blocking, and token rotation that cuts off live access immediately.
