@@ -4,3 +4,4 @@ node_modules/
 dist/
 connector/node_modules/
 connector/dist/
+.DS_Store
